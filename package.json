@@ -1,0 +1,22 @@
+{
+  "name": "scavenger",
+  "version": "0.0.1",
+  "description": "A simple remote scavenger hunt game.",
+  "main": "src/scavenger.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gpaciga/scavenger.git"
+  },
+  "author": "Gregory Paciga",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/gpaciga/scavenger/issues"
+  },
+  "homepage": "https://github.com/gpaciga/scavenger#readme",
+  "devDependencies": {
+    "jest": "^26.1.0"
+  }
+}
