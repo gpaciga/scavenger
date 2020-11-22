@@ -1,17 +1,17 @@
-const Scavenger = config => {
+const GAME_DIV_ID = "scavenger";
 
-    const GAME_DIV_ID = "scavenger";
+export default class Scavenger {
 
-    const resetGameDiv = () => {
+    resetGameDiv() {
         const gameDiv = document.getElementById(GAME_DIV_ID);
         $(gameDiv).empty();
         return gameDiv;
     }
 
-    const newForm = callback => {
+    newForm(callback) {
         const handleSubmit = (form, event) => {
             event.preventDefault(); // dont refresh the page
-            callback($(form).serializeArray());
+            callback.bind(this, $(form).serializeArray())();
         };
 
         const form = document.createElement('form');
@@ -19,9 +19,8 @@ const Scavenger = config => {
         return form;
     }
 
-    const newGame = () => {
-
-        const form = newForm(startGame);
+    newGame() {
+        const form = this.newForm(this.startGame);
         $(form).append(`
             <div class="input-group">
                 <input type="text" class="form-control" name="seed" placeholder="Magic Word" />
@@ -29,14 +28,14 @@ const Scavenger = config => {
             </div>
         `);
 
-        const gameDiv = resetGameDiv();
+        const gameDiv = this.resetGameDiv();
         $(gameDiv).append(`<h2>Start your game</h2>`);
         $(gameDiv).append(form);
     }
 
-    const startGame = (input) => {
-        const gameDiv = resetGameDiv();
-        const form = newForm(newGame);
+    startGame(input) {
+        const gameDiv = this.resetGameDiv();
+        const form = this.newForm(this.newGame);
 
         const inputObj = input.reduce((previous, current) => {
             previous[current.name] = current.value;
@@ -49,13 +48,4 @@ const Scavenger = config => {
         `);
         $(gameDiv).append(form);
     }
-
-    return {
-        newGame: newGame,
-    };
-};
-
-// only for supporting jest
-if (typeof module != 'undefined') {
-    module.exports = Scavenger;
 }
