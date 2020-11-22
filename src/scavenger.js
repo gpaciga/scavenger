@@ -1,3 +1,6 @@
+const items = require('./items');
+const chooser = require('./chooser');
+
 const GAME_DIV_ID = "scavenger";
 
 export default class Scavenger {
@@ -25,6 +28,22 @@ export default class Scavenger {
             <div class="input-group">
                 <input type="text" class="form-control" name="seed" placeholder="Magic Word" />
                 <button type="submit" class="btn btn-primary" />GO!</button>
+                <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#advanced-options" aria-expanded="false" aria-controls="advanced-options">
+                    Advanced Options
+                </button>
+            </div>
+            <div class="collapse" id="advanced-options">
+            <div class="input-group card card-body">
+                <label for="limit">Number of items</label>
+                <input type="number" name="limit" id="limit" min="3" max="20" value="5">
+            </div>
+            <div class="input-group card card-body">
+                <label for="superlatives">Use superlatives</label>
+                <input type="checkbox" name="superlatives" id="superlatives" />
+            </div>
+            <div class="input-group card card-body">
+                <label for="superlatives-chance">Chance of a superlative being used</label>
+                <input type="range" name="superlativeChance" id="superlatives-chance" min="0" max="1" step="0.01" value="0.25" />
             </div>
         `);
 
@@ -35,15 +54,38 @@ export default class Scavenger {
 
     startGame(input) {
         const gameDiv = this.resetGameDiv();
-        const form = this.newForm(this.newGame);
 
         const inputObj = input.reduce((previous, current) => {
             previous[current.name] = current.value;
             return previous;
         }, {});
 
+        $(gameDiv).append(`<p>The magic word was ${inputObj.seed}</p>`);
+        $(gameDiv).append(`<h2>Find these items!</h2>`);
+        const chosenItems = chooser(
+            items,
+            inputObj.seed,
+            {
+                limit: inputObj.limit,
+                superlatives: inputObj.superlatives,
+                superlativeChance: inputObj.superlativeChance
+            }
+        );
+        chosenItems.forEach(item => {
+            $(gameDiv).append(`
+                <div class="row">
+                    <div class="col-1">
+                        <input type="checkbox" id="${item.name}" />
+                    </div>
+                    <div class="col">
+                        <label for id="${item.name}">${item.name}</label>
+                    </div>
+                </div>
+            `);
+        });
+
+        const form = this.newForm(this.newGame);
         $(form).append(`
-            <p>The magic word was ${inputObj.seed}</p>
             <input type="submit" class="btn btn-secondary" value="Start over with a new magic word" />
         `);
         $(gameDiv).append(form);
