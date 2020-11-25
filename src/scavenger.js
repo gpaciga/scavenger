@@ -84,10 +84,8 @@ export default class Scavenger {
         $(gameDiv).append(`<div id="countdown" class="col-4 card justify-content-center"></div>`);
         countdown(5, 0);
 
-        const form = this.newForm(this.newGame);
-        $(form).append(`
-            <input type="submit" class="btn btn-secondary" value="Start over with a new magic word" />
+        $(gameDiv).append(`
+            <a class="btn btn-secondary" href="index.html" />Start over with a new magic word</a>
         `);
-        $(gameDiv).append(form);
     }
 }
