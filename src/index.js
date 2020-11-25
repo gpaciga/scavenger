@@ -1,2 +1,3 @@
 const Scavenger = require('./scavenger').default;
-module.exports = Scavenger;
+hunt = new Scavenger()
+hunt.newGame()
