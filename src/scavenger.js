@@ -1,3 +1,5 @@
+import countdown from './countdown';
+
 const items = require('./items');
 const chooser = require('./chooser');
 
@@ -83,6 +85,9 @@ export default class Scavenger {
                 </div>
             `);
         });
+
+        $(gameDiv).append(`<div id="countdown" class="col-4 card justify-content-center"></div>`);
+        countdown(5, 0);
 
         const form = this.newForm(this.newGame);
         $(form).append(`
