@@ -4,8 +4,9 @@ const seedrandom = require('seedrandom');
 const DEFAULT_LIMIT = 3; // number of items to return
 const SUPERLATIVE_CHANCE = 0.1; // change that if an item has superlatives, it uses the superlative
 
-const chooser = (items, seed, options = {}) => {
+const chooser = (items, options = {}) => {
 
+    const seed = options.seed ? options.seed : new Date().toDateString();
     const limit = options.limit ? Math.min(options.limit, items.length) : DEFAULT_LIMIT;
     const superlativeChance = options.superlativeChance ? options.superlativeChance : SUPERLATIVE_CHANCE;
     console.log('Chooser: seed:', seed);

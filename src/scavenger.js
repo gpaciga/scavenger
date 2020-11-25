@@ -57,21 +57,16 @@ export default class Scavenger {
     startGame(input) {
         const gameDiv = this.resetGameDiv();
 
-        const inputObj = input.reduce((previous, current) => {
+        const inputOptions = input.reduce((previous, current) => {
             previous[current.name] = current.value;
             return previous;
         }, {});
 
-        $(gameDiv).append(`<p>The magic word was ${inputObj.seed}</p>`);
+        $(gameDiv).append(`<p>The magic word was ${inputOptions.seed}</p>`);
         $(gameDiv).append(`<h2>Find these items!</h2>`);
         const chosenItems = chooser(
             items,
-            inputObj.seed,
-            {
-                limit: inputObj.limit,
-                superlatives: inputObj.superlatives,
-                superlativeChance: inputObj.superlativeChance
-            }
+            inputOptions
         );
         chosenItems.forEach(item => {
             $(gameDiv).append(`
