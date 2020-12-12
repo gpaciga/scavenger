@@ -27,7 +27,7 @@ export default class Scavenger {
     newGame() {
         const form = this.newForm(this.startGame);
         $(form).append(`
-            <div class="input-group">
+            <div class="input-group mb-3">
                 <input type="text" class="form-control" name="seed" placeholder="Magic Word" />
                 <button type="submit" class="btn btn-primary" />GO!</button>
                 <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#advanced-options" aria-expanded="false" aria-controls="advanced-options">
@@ -35,17 +35,23 @@ export default class Scavenger {
                 </button>
             </div>
             <div class="collapse" id="advanced-options">
-            <div class="input-group card card-body">
-                <label for="limit">Number of items</label>
-                <input type="number" name="limit" id="limit" min="3" max="20" value="5">
+            <div class="form-group row mb-3">
+                <label class="col-sm-4 col-form-label" for="limit">Number of items</label>
+                <div class="col-sm-8">
+                <input class="form-control" type="number" name="limit" id="limit" min="3" max="20" value="5">
+                </div>
             </div>
-            <div class="input-group card card-body">
-                <label for="superlatives">Use superlatives</label>
-                <input type="checkbox" name="superlatives" id="superlatives" />
+            <div class="form-group row mb-3">
+                <label class="col-sm-4 col-form-label" for="superlatives">Use superlatives</label>
+                <div class="col-sm-8">
+                <input class="" type="checkbox" name="superlatives" id="superlatives" />
+                </div>
             </div>
-            <div class="input-group card card-body">
-                <label for="superlatives-chance">Chance of a superlative being used</label>
-                <input type="range" name="superlativeChance" id="superlatives-chance" min="0" max="1" step="0.01" value="0.25" />
+            <div class="form-group row mb-3">
+                <label class="col-sm-4 col-form-label" for="superlatives-chance">Chance of a superlative being used</label>
+                <div class="col-sm-8">
+                <input class="form-control" type="range" name="superlativeChance" id="superlatives-chance" min="0" max="1" step="0.01" value="0.25" />
+                </div>
             </div>
         `);
 
